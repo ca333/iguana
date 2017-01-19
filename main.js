@@ -12,9 +12,11 @@ const os = require('os')
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;
 var fs = require('fs');
-var fs = require('fs-extra')
+var fs = require('fs-extra');
 var mkdirp = require('mkdirp');
 var pm2 = require('pm2');
+const fixPath = require('fix-path');
+const execFile = require('child_process').execFile;
 Promise = require('bluebird');
 
 app.setName('Iguana');
@@ -114,6 +116,7 @@ let loadingWindow
 
 
 function createLoadingWindow() {
+  launchPM2();
   mainWindow = null;
 
   // initialise window
@@ -269,3 +272,16 @@ app.on('activate', function () {
     //createWindow('open');
   }
 })
+
+function launchPM2() {
+fixPath();
+
+  var fpath = path.join(__dirname, '/node_modules/pm2/bin/pm2');
+  execFile(fpath, ['list'], (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
+});
