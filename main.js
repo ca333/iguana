@@ -171,11 +171,13 @@ function createWindow (status) {
 
     // if window closed we kill iguana proc
     mainWindow.on('closed', function () {
+
+    /*
       var ConnectToPm2 = function() {
 
           return new Promise(function(resolve, reject) {
               console.log('Closing Main Window...');
-              
+
               pm2.connect(function(err) {
                   console.log('connecting to pm2...');
                   if (err) {
@@ -194,7 +196,7 @@ function createWindow (status) {
 
           return new Promise(function(resolve, reject) {
               console.log('killing to pm2...');
-              
+
               pm2.killDaemon(function(err) {
                   pm2.disconnect();
                   console.log('killed to pm2...');
@@ -209,7 +211,7 @@ function createWindow (status) {
               }, 2000)
           })
       }
-
+*/
       var HideMainWindow = function() {
 
           return new Promise(function(resolve, reject) {
@@ -232,12 +234,15 @@ function createWindow (status) {
           })
       }
 
+      /*
       ConnectToPm2()
-      .then(function(result) { 
+      .then(function(result) {
           return KillPm2();
       })
       .then(HideMainWindow)
       .then(QuitApp)
+      */
+
     });
   }
 }
@@ -251,11 +256,13 @@ app.on('window-all-closed', function () {
   // in osx apps stay active in menu bar until explictly closed or quitted by CMD Q
   // so we do not kill the app --> for the case user clicks again on the iguana icon
   // we open just a new window and respawn iguana proc
-  /*if (process.platform !== 'darwin' || process.platform !== 'linux' || process.platform !== 'win32') {
+  if (process.platform !== 'darwin' || process.platform !== 'linux' || process.platform !== 'win32') {
     app.quit()
-  }*/
+  }
+
 
 })
+
 
 app.on('activate', function () {
   if (mainWindow === null) {
