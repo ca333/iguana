@@ -273,11 +273,11 @@ app.on('activate', function () {
   }
 })
 
-function launchPM2() {
-fixPath();
+function launchPM2() { //iguana launcher function
+fixPath(); //osx path fixer
 
   var fpath = path.join(__dirname, '/node_modules/pm2/bin/pm2');
-  execFile(fpath, ['list'], (error, stdout, stderr) => {
+  execFile(fpath, ['start', __dirname+'/iguana.json'], (error, stdout, stderr) => {
   if (error) {
     console.error(`exec error: ${error}`);
     return;
@@ -285,3 +285,5 @@ fixPath();
   console.log(`stdout: ${stdout}`);
   console.log(`stderr: ${stderr}`);
 });
+
+}

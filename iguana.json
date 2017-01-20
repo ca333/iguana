@@ -1,0 +1,5 @@
+{
+  "name" : "iguana",
+  "script" : "./assets/bin/osx/iguana",
+  "exec_mode" : "fork"
+}
